@@ -1,11 +1,8 @@
 import "./App.css";
+import VacancySearch from "./Pages/VacancySearch/VacancySearch";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Jobored</h1>
-    </div>
-  );
+  return <VacancySearch />;
 }
 
 export default App;

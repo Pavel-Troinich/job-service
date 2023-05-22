@@ -1,0 +1,27 @@
+.empty {
+  width: 330px;
+  margin: 120px auto;
+  text-align: center;
+
+  &_msg {
+    margin: 32px 0;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &_btn {
+    width: 164px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    background: #DEECFF;
+    color: #3B7CD3;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    &:active {
+      scale: .98;
+    }
+  }
+}
