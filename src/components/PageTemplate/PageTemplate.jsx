@@ -1,10 +1,10 @@
 import styles from "./PageTemplate.module.scss";
 import Header from "../Header/Header";
 
-function PageTemplate({ children }) {
+function PageTemplate({ selectedTab, setSelectedTab, children }) {
   return (
     <>
-      <Header />
+      <Header selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       <div className={styles.container}>{children}</div>
     </>
   );

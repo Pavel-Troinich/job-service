@@ -14,7 +14,8 @@ function VacancyCard({ vacancy }) {
       <div className={styles.vacancy_salary}>
         <p>
           <span className={styles.vacancy_salary_amount}>
-            зп от {vacancy.payment_from} rub
+            зп от {vacancy.payment_from} до {vacancy.payment_to}{" "}
+            {vacancy.currency}
           </span>
           <span> &#8226; </span>
           <span>{vacancy.type_of_work.title}</span>

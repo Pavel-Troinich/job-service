@@ -1,25 +1,21 @@
 import styles from "./Filter.module.scss";
 import catalog from "../../data/catalog";
-import { useState } from "react";
 import close from "../../assets/close.png";
 
-function Filter() {
-  const [catalogId, setCatalogId] = useState();
-  const [paymentFrom, setPaymentFrom] = useState(0);
-  const [paymentTo, setPaymentTo] = useState();
+function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
   const handleCatalogId = (e) => {
     setCatalogId(e.target.dataset.id);
-    console.log(catalogId);
+    console.log(e.target.dataset.id);
   };
 
   const handlePaymentFrom = (e) => {
     setPaymentFrom(e.target.value);
-    console.log(paymentFrom);
+    console.log(e.target.value);
   };
 
   const handlePaymentTo = (e) => {
     setPaymentTo(e.target.value);
-    console.log(paymentTo);
+    console.log(e.target.value);
   };
 
   const handleReset = () => {
@@ -74,7 +70,9 @@ function Filter() {
           type="number"
         />
       </div>
-      <button className={styles.btn}>Применить</button>
+      <button onClick={onclick} className={styles.btn}>
+        Применить
+      </button>
     </div>
   );
 }
