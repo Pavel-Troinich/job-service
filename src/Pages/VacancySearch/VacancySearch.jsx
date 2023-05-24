@@ -3,17 +3,22 @@ import Filter from "../../components/Filter/Filter";
 import VacancyList from "../../components/VacancyList/VacancyList";
 import Search from "../../components/Search/Search";
 import EmptyList from "../../components/EmptyList/EmptyList";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { HEADERS, PARAMS, URLS } from "../../config/apiConfig";
 
-function VacancySearch() {
-  const [vacancies, setVacancies] = useState(null);
-  const [catalogId, setCatalogId] = useState(null);
-  const [paymentFrom, setPaymentFrom] = useState(null);
-  const [paymentTo, setPaymentTo] = useState(null);
-  const [selectedTab, setSelectedTab] = useState("search");
-
+function VacancySearch({
+  paymentFrom,
+  paymentTo,
+  catalogId,
+  vacancies,
+  selectedTab,
+  setVacancies,
+  setCatalogId,
+  setPaymentFrom,
+  setPaymentTo,
+  setSelectedTab,
+}) {
   useEffect(() => {
     async function getData() {
       await axios({
@@ -23,7 +28,6 @@ function VacancySearch() {
         headers: HEADERS,
       }).then((res) => {
         localStorage.setItem("accessToken", res.data.access_token);
-        console.log(localStorage.getItem("accessToken"));
       });
       await axios({
         method: "get",
@@ -34,11 +38,13 @@ function VacancySearch() {
           payment_to: paymentTo,
           catalogues: catalogId,
         },
-        headers: HEADERS,
+        headers: {
+          ...HEADERS,
+          Authorization: `Bearer ${localStorage.accessToken}`,
+        },
       })
         .then((res) => {
           setVacancies(res.data.objects);
-          console.log("done");
         })
         .catch((e) => console.log(e));
     }
@@ -61,7 +67,6 @@ function VacancySearch() {
     })
       .then((res) => {
         setVacancies(res.data.objects);
-        console.log(paymentFrom, paymentTo);
       })
       .catch((e) => console.log(e));
   };

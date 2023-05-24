@@ -3,9 +3,11 @@ import unsaved from "../../assets/unsaved.png";
 import saved from "../../assets/saved.png";
 import location from "../../assets/location.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function VacancyCard({ vacancy }) {
   const [isSaved, setIsSaved] = useState(false);
+  const navigate = useNavigate();
   const saveVacancy = () => {
     if (!isSaved) {
       setIsSaved(true);
@@ -23,10 +25,12 @@ function VacancyCard({ vacancy }) {
     }
   };
 
+  const openVacancy = () => navigate(`vacancy/${vacancy.id}`);
+
   return (
     <div className={styles.vacancy}>
       <div className={styles.vacancy_title}>
-        <p>{vacancy.profession}</p>
+        <p onClick={openVacancy}>{vacancy.profession}</p>
         <div onClick={saveVacancy}>
           <img src={isSaved ? saved : unsaved} alt="save" />
         </div>

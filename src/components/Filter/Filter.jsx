@@ -1,8 +1,26 @@
 import styles from "./Filter.module.scss";
-import catalog from "../../data/catalog";
 import close from "../../assets/close.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { HEADERS, URLS } from "../../config/apiConfig";
 
 function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
+  const [catalogues, setCatalogues] = useState(null);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: URLS.catalogues,
+      headers: {
+        ...HEADERS,
+        Authorization: `Bearer ${localStorage.accessToken}`,
+      },
+    })
+      .then((res) => {
+        setCatalogues(res.data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
   const handleCatalogId = (e) => {
     setCatalogId(e.target.dataset.id);
     console.log(e.target.dataset.id);
@@ -24,7 +42,7 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
     setPaymentTo(null);
   };
 
-  return (
+  return catalogues ? (
     <div className={styles.filter}>
       <div className={styles.head}>
         <p className={styles.head_title}>Фильтры</p>
@@ -44,7 +62,7 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
           >
             Выберите отрасль
           </option>
-          {catalog.map((item) => (
+          {catalogues.map((item) => (
             <option onClick={handleCatalogId} data-id={item.key} key={item.key}>
               {item.title_rus}
             </option>
@@ -74,7 +92,7 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
         Применить
       </button>
     </div>
-  );
+  ) : null;
 }
 
 export default Filter;
