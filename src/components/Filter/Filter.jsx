@@ -53,7 +53,11 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
       </div>
       <div>
         <p className={styles.subtitle}>Отрасль</p>
-        <select className={styles.select} defaultValue="Выберите отрасль">
+        <select
+          data-elem="industry-select"
+          className={styles.select}
+          defaultValue="Выберите отрасль"
+        >
           <option
             selected
             disabled
@@ -72,6 +76,7 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
       <div>
         <p className={styles.subtitle}>Оклад</p>
         <input
+          data-elem="salary-from-input"
           onChange={handlePaymentFrom}
           min="0"
           step="100"
@@ -80,6 +85,7 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
           type="number"
         />
         <input
+          data-elem="salary-to-input"
           onChange={handlePaymentTo}
           min="0"
           step="100"
@@ -88,7 +94,11 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
           type="number"
         />
       </div>
-      <button onClick={onclick} className={styles.btn}>
+      <button
+        data-elem="search-button"
+        onClick={onclick}
+        className={styles.btn}
+      >
         Применить
       </button>
     </div>

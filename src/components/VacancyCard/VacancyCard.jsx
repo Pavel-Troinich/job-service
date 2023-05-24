@@ -28,12 +28,15 @@ function VacancyCard({ vacancy }) {
   const openVacancy = () => navigate(`vacancy/${vacancy.id}`);
 
   return (
-    <div className={styles.vacancy}>
+    <div data-elem={`vacancy-${vacancy.id}`} className={styles.vacancy}>
       <div className={styles.vacancy_title}>
         <p onClick={openVacancy}>{vacancy.profession}</p>
-        <div onClick={saveVacancy}>
+        <button
+          data-elem={`vacancy-${vacancy.id}-shortlist-button`}
+          onClick={saveVacancy}
+        >
           <img src={isSaved ? saved : unsaved} alt="save" />
-        </div>
+        </button>
       </div>
       <div className={styles.vacancy_salary}>
         <p>
