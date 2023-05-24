@@ -1,14 +1,34 @@
 import styles from "./VacancyCard.module.scss";
 import unsaved from "../../assets/unsaved.png";
+import saved from "../../assets/saved.png";
 import location from "../../assets/location.png";
+import { useState } from "react";
 
 function VacancyCard({ vacancy }) {
+  const [isSaved, setIsSaved] = useState(false);
+  const saveVacancy = () => {
+    if (!isSaved) {
+      setIsSaved(true);
+      let favoriteVacancies;
+      if (localStorage.favoriteVacancies) {
+        favoriteVacancies = JSON.parse(localStorage.favoriteVacancies);
+      } else favoriteVacancies = [];
+      favoriteVacancies.push(vacancy);
+      localStorage.favoriteVacancies = JSON.stringify(favoriteVacancies);
+    } else {
+      setIsSaved(false);
+      let favoriteVacancies = JSON.parse(localStorage.favoriteVacancies);
+      favoriteVacancies.splice(favoriteVacancies.indexOf(vacancy), 1);
+      localStorage.favoriteVacancies = JSON.stringify(favoriteVacancies);
+    }
+  };
+
   return (
     <div className={styles.vacancy}>
       <div className={styles.vacancy_title}>
         <p>{vacancy.profession}</p>
-        <div>
-          <img src={unsaved} alt="unsaved" />
+        <div onClick={saveVacancy}>
+          <img src={isSaved ? saved : unsaved} alt="save" />
         </div>
       </div>
       <div className={styles.vacancy_salary}>

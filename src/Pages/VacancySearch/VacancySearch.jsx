@@ -2,7 +2,6 @@ import PageTemplate from "../../components/PageTemplate/PageTemplate";
 import Filter from "../../components/Filter/Filter";
 import VacancyList from "../../components/VacancyList/VacancyList";
 import Search from "../../components/Search/Search";
-// import vacancies from "../../data/vacancies";
 import EmptyList from "../../components/EmptyList/EmptyList";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -69,7 +68,9 @@ function VacancySearch() {
 
   return (
     <PageTemplate selectedTab={selectedTab} setSelectedTab={setSelectedTab}>
-      {vacancies ? (
+      {!vacancies ? (
+        <EmptyList setSelectedTab={setSelectedTab} />
+      ) : selectedTab === "search" ? (
         <>
           <Filter
             setPaymentFrom={setPaymentFrom}
@@ -82,8 +83,11 @@ function VacancySearch() {
             <VacancyList vacancies={vacancies} />
           </div>
         </>
+      ) : localStorage.favoriteVacancies &&
+        JSON.parse(localStorage.favoriteVacancies).length !== 0 ? (
+        <VacancyList vacancies={JSON.parse(localStorage.favoriteVacancies)} />
       ) : (
-        <EmptyList />
+        <EmptyList setSelectedTab={setSelectedTab} />
       )}
     </PageTemplate>
   );
