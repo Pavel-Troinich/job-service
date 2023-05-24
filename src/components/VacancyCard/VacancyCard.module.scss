@@ -4,7 +4,6 @@
   margin-top: 16px;
   border: 1px solid #EAEBED;
   border-radius: 12px;
-  cursor: pointer;
   background: #ffffff;
 
   &_title {
@@ -16,6 +15,11 @@
       font-size: 20px;
       font-weight: 600;
       color: #5E96FC;
+      cursor: pointer;
+    }
+
+    div {
+      cursor: pointer;
     }
   }
 
