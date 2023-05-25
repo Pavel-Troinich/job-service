@@ -23,17 +23,14 @@ function Filter({ setCatalogId, setPaymentFrom, setPaymentTo, onclick }) {
 
   const handleCatalogId = (e) => {
     setCatalogId(e.target.dataset.id);
-    console.log(e.target.dataset.id);
   };
 
   const handlePaymentFrom = (e) => {
     setPaymentFrom(e.target.value);
-    console.log(e.target.value);
   };
 
   const handlePaymentTo = (e) => {
     setPaymentTo(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleReset = () => {

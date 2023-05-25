@@ -6,6 +6,7 @@ import VacancyDetails from "./Pages/VacancyDetails/VacancyDetails";
 
 function App() {
   const [vacancies, setVacancies] = useState(null);
+  const [keyword, setKeyword] = useState(null);
   const [catalogId, setCatalogId] = useState(null);
   const [paymentFrom, setPaymentFrom] = useState(null);
   const [paymentTo, setPaymentTo] = useState(null);
@@ -26,6 +27,8 @@ function App() {
           setPaymentFrom={setPaymentFrom}
           setPaymentTo={setPaymentTo}
           setSelectedTab={setSelectedTab}
+          keyword={keyword}
+          setKeyword={setKeyword}
         />
       ),
     },

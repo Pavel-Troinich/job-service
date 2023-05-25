@@ -18,6 +18,8 @@ function VacancySearch({
   setPaymentFrom,
   setPaymentTo,
   setSelectedTab,
+  keyword,
+  setKeyword,
 }) {
   useEffect(() => {
     async function getData() {
@@ -59,6 +61,7 @@ function VacancySearch({
         published: 1,
         no_agreement: 1,
         count: 50,
+        keyword: keyword,
         payment_from: paymentFrom,
         payment_to: paymentTo,
         catalogues: catalogId,
@@ -84,7 +87,7 @@ function VacancySearch({
             onclick={searchVacancy}
           />
           <div>
-            <Search />
+            <Search setKeyword={setKeyword} searchVacancy={searchVacancy} />
             <VacancyList vacancies={vacancies} />
           </div>
         </>
